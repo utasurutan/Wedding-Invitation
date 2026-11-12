@@ -13,7 +13,7 @@ export default function AudioPlayer({ isPlaying, setIsPlaying, isOpened }) {
       const playPromise = audioRef.current.play();
       if (playPromise !== undefined) {
         playPromise.catch((err) => {
-          console.warn("Autoplay ditolak oleh browser:", err);
+          console.warn("Autoplay ditunda oleh kebijakan browser:", err);
           setIsPlaying(false);
         });
       }
@@ -47,7 +47,8 @@ export default function AudioPlayer({ isPlaying, setIsPlaying, isOpened }) {
           }`}
         >
           <span className="text-champagne-300 font-semibold">{weddingData.audio.title}</span>
-          <span className="text-stone-400 text-[10px] ml-1.5 font-sans">({isPlaying ? 'Memutar' : 'Jeda'})</span>
+          <span className="text-stone-300 text-[10px] ml-1.5 font-sans">&bull; {weddingData.audio.artist}</span>
+          <span className="text-stone-400 text-[10px] ml-1 font-sans">({isPlaying ? 'Memutar' : 'Jeda'})</span>
         </div>
 
         {/* Tombol Pemutar Musik Estetik */}
@@ -64,14 +65,14 @@ export default function AudioPlayer({ isPlaying, setIsPlaying, isOpened }) {
             <div className="absolute w-1.5 h-1.5 rounded-full bg-amber-200" />
           </div>
 
-          {/* Equalizer Bars Animasi (Bespoke UX Touch) */}
+          {/* Equalizer Bars Animasi */}
           <div className="flex items-end gap-[2px] h-4 w-4 justify-center">
             <span className={`w-[2.5px] bg-champagne-400 rounded-full transition-all ${isPlaying ? 'animate-eq-1' : 'h-1'}`} />
             <span className={`w-[2.5px] bg-champagne-300 rounded-full transition-all ${isPlaying ? 'animate-eq-2' : 'h-2'}`} />
             <span className={`w-[2.5px] bg-champagne-400 rounded-full transition-all ${isPlaying ? 'animate-eq-3' : 'h-1'}`} />
           </div>
 
-          {/* Ikon Volume status */}
+          {/* Ikon Volume */}
           <div className="text-stone-300 group-hover:text-champagne-200 transition-colors">
             {isPlaying ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5 text-stone-500" />}
           </div>

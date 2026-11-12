@@ -9,6 +9,8 @@ import Gallery from './components/Gallery';
 import WeddingGift from './components/WeddingGift';
 import RSVP from './components/RSVP';
 import Footer from './components/Footer';
+import FloatingPetals from './components/FloatingPetals';
+import ScrollProgress from './components/ScrollProgress';
 
 export default function App() {
   const [isInvitationOpened, setIsInvitationOpened] = useState(false);
@@ -37,19 +39,25 @@ export default function App() {
       if (targetElement) {
         targetElement.scrollIntoView({ behavior: 'smooth' });
       }
-    }, 300);
+    }, 350);
   };
 
   return (
     <div className="min-h-screen bg-[#fcfaf7] text-stone-800 font-sans selection:bg-sage-200 selection:text-sage-900 relative">
       
-      {/* 1. Cover Depan (Hero dengan parameter URL ?to=...) */}
+      {/* 1. Indikator Progress Scroll Emas di Paling Atas */}
+      <ScrollProgress isOpened={isInvitationOpened} />
+
+      {/* 2. Animasi Kelopak Bunga Gugur Lembut Saat di-Scroll (Floating Petals) */}
+      {isInvitationOpened && <FloatingPetals count={20} />}
+
+      {/* 3. Cover Depan (Hero dengan parameter URL ?to=...) */}
       <Hero 
         isOpened={isInvitationOpened} 
         onOpenInvitation={handleOpenInvitation} 
       />
 
-      {/* 2. Audio Player & Bottom Navigation */}
+      {/* 4. Audio Player & Bottom Navigation */}
       <AudioPlayer 
         isPlaying={isPlaying} 
         setIsPlaying={setIsPlaying} 
@@ -60,24 +68,24 @@ export default function App() {
         isOpened={isInvitationOpened} 
       />
 
-      {/* Konten Utama Undangan */}
+      {/* Konten Utama Undangan dengan Scroll Reveal */}
       <main className={`transition-opacity duration-1000 ${isInvitationOpened ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-        {/* 3. Profil Mempelai & Love Story Timeline */}
+        {/* 5. Profil Mempelai & Love Story Timeline */}
         <Profiles />
 
-        {/* 4. Jadwal Acara, Countdown Timer & Dress Code Palette */}
+        {/* 6. Jadwal Acara, Countdown Timer & Dress Code Palette */}
         <EventSchedule />
 
-        {/* 5. Peta Lokasi (Iframe Google Maps & CTA Native) */}
+        {/* 7. Peta Lokasi (Iframe Google Maps & CTA Native) */}
         <LocationMaps />
 
-        {/* 6. Galeri Pre-Wedding & Lightbox Modal */}
+        {/* 8. Galeri Pre-Wedding & Lightbox Modal */}
         <Gallery />
 
-        {/* 7. Amplop Digital (Realistic Bank Cards & QRIS) */}
+        {/* 9. Amplop Digital (Realistic Bank Cards & QRIS) */}
         <WeddingGift />
 
-        {/* 8. Buku Tamu & Formulir RSVP */}
+        {/* 10. Buku Tamu & Formulir RSVP */}
         <RSVP />
 
         {/* Footer */}

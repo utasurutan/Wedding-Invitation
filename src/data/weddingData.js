@@ -220,8 +220,10 @@ export const weddingData = {
   ],
 
   audio: {
-    title: "Shane Filan - Beautiful in White",
-    subtitle: "Acoustic Piano & Cello",
-    src: "https://cdn.pixabay.com/download/audio/2022/05/16/audio_c976d91f21.mp3?filename=romantic-wedding-piano-112191.mp3"
+    title: "Canon in D Major",
+    artist: "Johann Pachelbel",
+    subtitle: "Orchestral Wedding Classic",
+    // File audio lokal yang tersimpan langsung di folder public/audio/
+    src: "/audio/wedding-song.mp3"
   }
 };
