@@ -224,6 +224,6 @@ export const weddingData = {
     artist: "Johann Pachelbel",
     subtitle: "Orchestral Wedding Classic",
     // File audio lokal yang tersimpan langsung di folder public/audio/
-    src: "/audio/wedding-song.mp3"
+    src: `${import.meta.env.BASE_URL}audio/wedding-song.mp3`
   }
 };
