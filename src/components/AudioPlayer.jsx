@@ -1,37 +1,75 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Disc3, Volume2, VolumeX, Music } from 'lucide-react';
+import { Disc3, Volume2, VolumeX } from 'lucide-react';
 import { weddingData } from '../data/weddingData';
 
-export default function AudioPlayer({ isPlaying, setIsPlaying, isOpened }) {
+export default function AudioPlayer({ isPlaying, setIsPlaying }) {
   const audioRef = useRef(null);
   const [showTooltip, setShowTooltip] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
+  // Fungsi pemutar audio yang aman
+  const playAudio = () => {
+    if (!audioRef.current) return;
+    const promise = audioRef.current.play();
+    if (promise !== undefined) {
+      promise
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch((err) => {
+          console.warn("Autoplay ditahan oleh browser:", err);
+          setIsPlaying(false);
+        });
+    }
+  };
+
+  // Efek Autoplay saat website pertama kali dibuka
+  useEffect(() => {
+    // 1. Coba putar langsung saat halaman selesai dimuat
+    playAudio();
+
+    // 2. Fallback cerdas kebijakan browser: jika autoplay audio dibatasi sebelum gestur pengguna,
+    // dengarkan interaksi pertama (klik, sentuh, atau scroll) di mana saja di layar untuk langsung menyetel lagu
+    const unlockAudioOnFirstInteraction = () => {
+      if (!hasInteracted) {
+        setHasInteracted(true);
+        playAudio();
+      }
+    };
+
+    window.addEventListener('click', unlockAudioOnFirstInteraction, { once: true });
+    window.addEventListener('touchstart', unlockAudioOnFirstInteraction, { once: true });
+    window.addEventListener('scroll', unlockAudioOnFirstInteraction, { once: true });
+    window.addEventListener('keydown', unlockAudioOnFirstInteraction, { once: true });
+
+    return () => {
+      window.removeEventListener('click', unlockAudioOnFirstInteraction);
+      window.removeEventListener('touchstart', unlockAudioOnFirstInteraction);
+      window.removeEventListener('scroll', unlockAudioOnFirstInteraction);
+      window.removeEventListener('keydown', unlockAudioOnFirstInteraction);
+    };
+  }, []);
+
+  // Sync state isPlaying dengan status audio
   useEffect(() => {
     if (!audioRef.current) return;
 
     if (isPlaying) {
-      const playPromise = audioRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch((err) => {
-          console.warn("Autoplay ditunda oleh kebijakan browser:", err);
-          setIsPlaying(false);
-        });
-      }
+      audioRef.current.play().catch(() => {});
     } else {
       audioRef.current.pause();
     }
-  }, [isPlaying, setIsPlaying]);
+  }, [isPlaying]);
 
-  const togglePlay = () => {
+  const togglePlay = (e) => {
+    e.stopPropagation();
     setIsPlaying((prev) => !prev);
     setShowTooltip(true);
     setTimeout(() => setShowTooltip(false), 3000);
   };
 
-  if (!isOpened) return null;
-
   return (
-    <div className="fixed top-5 right-5 z-40">
+    <div className="fixed top-5 right-5 z-50">
       <audio
         ref={audioRef}
         loop
@@ -42,7 +80,7 @@ export default function AudioPlayer({ isPlaying, setIsPlaying, isOpened }) {
       <div className="relative flex items-center">
         {/* Tooltip info lagu */}
         <div 
-          className={`absolute right-14 bg-stone-900/90 text-white text-xs px-3.5 py-1.5 rounded-full border border-champagne-300/30 whitespace-nowrap shadow-xl transition-all duration-300 pointer-events-none ${
+          className={`absolute right-14 bg-stone-900/95 text-white text-xs px-3.5 py-1.5 rounded-full border border-champagne-300/40 whitespace-nowrap shadow-2xl transition-all duration-300 pointer-events-none backdrop-blur-md ${
             showTooltip ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-2'
           }`}
         >
@@ -57,7 +95,7 @@ export default function AudioPlayer({ isPlaying, setIsPlaying, isOpened }) {
           onMouseEnter={() => setShowTooltip(true)}
           onMouseLeave={() => setShowTooltip(false)}
           aria-label={isPlaying ? "Jeda Musik" : "Putar Musik"}
-          className="group relative flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-full bg-stone-900/85 hover:bg-stone-900 backdrop-blur-md shadow-2xl border border-champagne-300/40 text-stone-200 transition-all duration-300 active:scale-95 cursor-pointer"
+          className="group relative flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-full bg-stone-900/90 hover:bg-stone-900 backdrop-blur-md shadow-2xl border border-champagne-300/40 text-stone-200 transition-all duration-300 active:scale-95 cursor-pointer"
         >
           {/* Piringan Hitam Berputar */}
           <div className={`relative flex items-center justify-center w-8 h-8 rounded-full bg-stone-950 border border-stone-800 ${isPlaying ? 'animate-spin-slow' : ''}`}>
@@ -74,7 +112,7 @@ export default function AudioPlayer({ isPlaying, setIsPlaying, isOpened }) {
 
           {/* Ikon Volume */}
           <div className="text-stone-300 group-hover:text-champagne-200 transition-colors">
-            {isPlaying ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5 text-stone-500" />}
+            {isPlaying ? <Volume2 className="w-3.5 h-3.5 text-champagne-300" /> : <VolumeX className="w-3.5 h-3.5 text-stone-500" />}
           </div>
         </button>
       </div>

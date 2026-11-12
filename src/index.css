@@ -60,12 +60,14 @@
 .text-gold-gradient {
   background: linear-gradient(135deg, #b38728 0%, #f6e5a6 50%, #9c6c19 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gold-subtle {
   background: linear-gradient(135deg, #cba56f 0%, #ecdcb8 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 

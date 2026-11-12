@@ -14,7 +14,8 @@ import ScrollProgress from './components/ScrollProgress';
 
 export default function App() {
   const [isInvitationOpened, setIsInvitationOpened] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
+  // Mulai otomatis memutar musik saat website pertama kali dibuka
+  const [isPlaying, setIsPlaying] = useState(true);
 
   // Kunci Scroll Layar sebelum undangan dibuka
   useEffect(() => {
@@ -51,41 +52,41 @@ export default function App() {
       {/* 2. Animasi Kelopak Bunga Gugur Lembut Saat di-Scroll (Floating Petals) */}
       {isInvitationOpened && <FloatingPetals count={20} />}
 
-      {/* 3. Cover Depan (Hero dengan parameter URL ?to=...) */}
+      {/* 3. Audio Player (Aktif sejak awal buka web & dapat dikontrol) */}
+      <AudioPlayer 
+        isPlaying={isPlaying} 
+        setIsPlaying={setIsPlaying} 
+      />
+
+      {/* 4. Cover Depan (Hero dengan parameter URL ?to=...) */}
       <Hero 
         isOpened={isInvitationOpened} 
         onOpenInvitation={handleOpenInvitation} 
       />
 
-      {/* 4. Audio Player & Bottom Navigation */}
-      <AudioPlayer 
-        isPlaying={isPlaying} 
-        setIsPlaying={setIsPlaying} 
-        isOpened={isInvitationOpened} 
-      />
-
+      {/* 5. Floating Bottom Navigation Bar */}
       <BottomNav 
         isOpened={isInvitationOpened} 
       />
 
       {/* Konten Utama Undangan dengan Scroll Reveal */}
       <main className={`transition-opacity duration-1000 ${isInvitationOpened ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-        {/* 5. Profil Mempelai & Love Story Timeline */}
+        {/* 6. Profil Mempelai & Love Story Timeline */}
         <Profiles />
 
-        {/* 6. Jadwal Acara, Countdown Timer & Dress Code Palette */}
+        {/* 7. Jadwal Acara, Countdown Timer & Dress Code Palette */}
         <EventSchedule />
 
-        {/* 7. Peta Lokasi (Iframe Google Maps & CTA Native) */}
+        {/* 8. Peta Lokasi (Iframe Google Maps & CTA Native) */}
         <LocationMaps />
 
-        {/* 8. Galeri Pre-Wedding & Lightbox Modal */}
+        {/* 9. Galeri Pre-Wedding & Lightbox Modal */}
         <Gallery />
 
-        {/* 9. Amplop Digital (Realistic Bank Cards & QRIS) */}
+        {/* 10. Amplop Digital (Realistic Bank Cards & QRIS) */}
         <WeddingGift />
 
-        {/* 10. Buku Tamu & Formulir RSVP */}
+        {/* 11. Buku Tamu & Formulir RSVP */}
         <RSVP />
 
         {/* Footer */}

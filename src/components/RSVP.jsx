@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, MessageSquareHeart, CheckCircle2, Clock, Heart, Users, Sparkles } from 'lucide-react';
+import { Send, MessageSquareHeart, CheckCircle2, Clock, Heart, Users, Sparkles, MessageCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { weddingData } from '../data/weddingData';
+
+const quickWishes = [
+  "Semoga menjadi keluarga sakinah, mawaddah, warahmah 🕊️",
+  "Selamat ya Rakha & Kinar! Bahagia selalu selamanya ❤️",
+  "Lancar acaranya sampai hari H, barakallahu fiikum! 💐",
+  "Doa terbaik menyertai langkah suci kalian berdua ✨"
+];
 
 export default function RSVP() {
   const [formData, setFormData] = useState({
@@ -43,6 +50,13 @@ export default function RSVP() {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
+    }));
+  };
+
+  const applyQuickWish = (wish) => {
+    setFormData((prev) => ({
+      ...prev,
+      message: wish,
     }));
   };
 
@@ -200,7 +214,24 @@ export default function RSVP() {
               </div>
             </div>
 
+            {/* Quick Wish Template Chips */}
             <div>
+              <span className="block font-display text-[10px] uppercase tracking-wider text-stone-500 mb-2 font-medium">
+                Pilih Ucapan Cepat (Opsional):
+              </span>
+              <div className="flex flex-wrap gap-2 mb-3">
+                {quickWishes.map((wish, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    onClick={() => applyQuickWish(wish)}
+                    className="text-xs px-3 py-1.5 rounded-full bg-stone-100 hover:bg-champagne-100/70 text-stone-700 border border-stone-200 transition-colors text-left"
+                  >
+                    {wish}
+                  </button>
+                ))}
+              </div>
+
               <label htmlFor="message" className="block font-display text-xs uppercase tracking-wider text-stone-700 mb-2 font-semibold">
                 Pesan, Harapan &amp; Doa Restu *
               </label>

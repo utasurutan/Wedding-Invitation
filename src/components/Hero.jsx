@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Sparkles, Heart, Calendar, ArrowDown } from 'lucide-react';
+import { Mail, Sparkles, Heart, Calendar, ArrowDown, Music } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { weddingData } from '../data/weddingData';
 
@@ -36,14 +36,14 @@ export default function Hero({ isOpened, onOpenInvitation }) {
 
     setTimeout(() => {
       onOpenInvitation();
-    }, 600);
+    }, 400);
   };
 
   return (
     <section 
       id="hero" 
       className={`relative w-full min-h-screen flex items-center justify-center text-center px-4 py-8 overflow-hidden transition-all duration-1000 ${
-        isOpened ? 'relative' : 'fixed inset-0 z-50 overflow-hidden'
+        isOpened ? 'relative' : 'fixed inset-0 z-40 overflow-hidden'
       }`}
     >
       {/* Background Image: High-fashion Editorial Wedding with Layered Vignette */}
@@ -58,11 +58,11 @@ export default function Hero({ isOpened, onOpenInvitation }) {
 
       {/* Ornamen Garis Halus Gilded Gold Frame */}
       <div className="absolute inset-4 md:inset-8 border border-champagne-300/30 rounded-3xl pointer-events-none z-10 flex flex-col justify-between p-4">
-        <div className="flex justify-between items-center text-champagne-200/40 text-[10px] tracking-[0.3em] uppercase font-display">
+        <div className="flex justify-between items-center text-champagne-200/50 text-[10px] tracking-[0.3em] uppercase font-display">
           <span>The Wedding</span>
           <span>MMXXVI</span>
         </div>
-        <div className="flex justify-between items-center text-champagne-200/40 text-[10px] tracking-[0.3em] uppercase font-display">
+        <div className="flex justify-between items-center text-champagne-200/50 text-[10px] tracking-[0.3em] uppercase font-display">
           <span>Jakarta</span>
           <span>28.11.2026</span>
         </div>
@@ -117,7 +117,7 @@ export default function Hero({ isOpened, onOpenInvitation }) {
           transition={{ duration: 1, delay: 0.4 }}
           className="w-full flex flex-col items-center"
         >
-          {/* Kartu Penerima Undangan (Parchment Card with Gilded Border) */}
+          {/* Kartu Penerima Undangan */}
           <div className="w-full max-w-sm rounded-2xl p-6 bg-stone-900/60 backdrop-blur-md border border-champagne-300/30 shadow-2xl mb-6 relative overflow-hidden text-center">
             <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-champagne-300 to-transparent" />
             
@@ -134,12 +134,12 @@ export default function Hero({ isOpened, onOpenInvitation }) {
             </p>
           </div>
 
-          {/* Tombol Interaktif Buka Undangan dengan Royal Wax Stamp Accent */}
+          {/* Tombol Interaktif Buka Undangan */}
           <button
             onClick={handleOpenClick}
             disabled={isOpening}
             type="button"
-            className="group relative inline-flex items-center gap-3.5 px-8 py-4 rounded-full bg-gradient-to-r from-sage-800 via-sage-700 to-sage-800 hover:from-sage-700 hover:to-sage-600 text-white font-medium text-sm md:text-base tracking-widest uppercase font-display shadow-2xl shadow-stone-950/80 border border-champagne-300/40 hover:border-champagne-200 transform hover:-translate-y-1 active:translate-y-0 transition-all duration-300 cursor-pointer"
+            className="group relative inline-flex items-center gap-3.5 px-8 py-4 rounded-full bg-gradient-to-r from-sage-800 via-sage-700 to-sage-800 hover:from-sage-700 hover:to-sage-600 text-white font-medium text-sm md:text-base tracking-widest uppercase font-display shadow-2xl shadow-stone-950/80 border border-champagne-300/40 hover:border-champagne-200 transform hover:-translate-y-1 active:translate-y-0 transition-all duration-300 cursor-pointer ring-4 ring-champagne-400/20"
           >
             <div className="w-6 h-6 rounded-full bg-champagne-300 text-stone-900 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
               <Mail className="w-3.5 h-3.5 fill-stone-900" />
