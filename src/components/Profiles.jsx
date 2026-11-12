@@ -1,52 +1,61 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Instagram, Heart } from 'lucide-react';
+import { Instagram, Heart, Sparkles } from 'lucide-react';
 import { weddingData } from '../data/weddingData';
 
 export default function Profiles() {
   const { groom, bride, quote, quoteSource } = weddingData.couple;
+  const { loveStory } = weddingData;
 
   return (
-    <section id="profiles" className="relative py-20 px-4 md:px-8 bg-sage-50 overflow-hidden">
-      {/* Background Floral Texture Accents */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-sage-100 rounded-full filter blur-3xl opacity-60 -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-champagne-100 rounded-full filter blur-3xl opacity-60 translate-x-1/3 translate-y-1/3" />
+    <section id="profiles" className="relative py-24 px-4 md:px-8 bg-paper overflow-hidden">
+      {/* Background Soft Glow Accents */}
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-96 h-96 bg-sage-200/40 rounded-full filter blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-80 h-80 bg-champagne-200/40 rounded-full filter blur-[100px] pointer-events-none" />
 
       <div className="max-w-5xl mx-auto relative z-10">
-        {/* Kutipan Ayat Suci */}
+        
+        {/* Kutipan Ayat Suci (Editorial Typography) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8 }}
-          className="text-center max-w-2xl mx-auto mb-16"
+          transition={{ duration: 0.9 }}
+          className="text-center max-w-2xl mx-auto mb-20"
         >
-          <div className="inline-block mb-3 px-4 py-1 rounded-full bg-sage-100 border border-sage-200 text-xs font-serif tracking-widest text-sage-800">
-            Bismillahirrahmanirrahim
+          <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-white/80 border border-champagne-300/50 shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-champagne-600" />
+            <span className="font-serif italic text-xs tracking-widest text-stone-700">
+              Bismillahirrahmanirrahim
+            </span>
           </div>
-          <p className="font-serif italic text-stone-700 text-sm md:text-base leading-relaxed mb-3">
+
+          <p className="font-serif italic text-stone-700 text-base md:text-lg leading-relaxed mb-3">
             "{quote}"
           </p>
-          <p className="text-xs font-semibold uppercase tracking-wider text-sage-700">
+          <p className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-sage-800">
             {quoteSource}
           </p>
 
-          <div className="mt-8">
-            <h2 className="font-serif text-3xl md:text-4xl text-stone-900 font-normal">
+          <div className="mt-10">
+            <span className="font-display text-[10px] uppercase tracking-[0.35em] text-champagne-700 font-semibold block mb-1">
+              Pasangan Berbahagia
+            </span>
+            <h2 className="font-serif text-3xl md:text-5xl text-stone-900 font-normal">
               Kedua Mempelai
             </h2>
-            <p className="text-stone-600 text-sm mt-2 max-w-md mx-auto">
-              Dengan memohon rahmat dan ridho Allah Subhanahu Wa Ta'ala, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri pernikahan kami:
+            <p className="font-serif text-stone-600 text-sm md:text-base mt-2 max-w-md mx-auto italic">
+              Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengikat janji suci pernikahan:
             </p>
           </div>
         </motion.div>
 
-        {/* Pasangan Mempelai: 2 Kolom Sejajar di Desktop, Tumpuk di Mobile */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center relative">
+        {/* Pasangan Mempelai: 2 Kolom Sejajar Desktop, Stack di Mobile */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 items-center relative mb-24">
           
-          {/* Ikon Penghubung di Tengah untuk Layar Besar */}
-          <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-champagne-50 border-2 border-champagne-300 items-center justify-center shadow-lg">
-            <span className="font-serif text-xl font-bold text-champagne-600">&amp;</span>
+          {/* Ampersand Center Crest untuk Desktop */}
+          <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-14 h-14 rounded-full bg-[#fbf9f6] border border-champagne-300 shadow-xl items-center justify-center">
+            <span className="font-script text-3xl text-gold-gradient font-bold">&amp;</span>
           </div>
 
           {/* Kartu Mempelai Pria (Rakha) */}
@@ -55,36 +64,36 @@ export default function Profiles() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8 }}
-            className="flex flex-col items-center text-center p-8 rounded-3xl glass-card hover:shadow-xl transition-shadow duration-300"
+            className="flex flex-col items-center text-center p-8 md:p-10 rounded-3xl wedding-card hover:shadow-xl transition-all duration-500"
           >
-            {/* Bingkai Foto Arch / Arsitektural */}
+            {/* Foto Arch Mewah dengan Double Hairline Border */}
             <div className="relative mb-6">
-              <div className="w-48 h-60 rounded-t-full rounded-b-2xl overflow-hidden border-4 border-white shadow-xl relative z-10">
+              <div className="w-48 h-64 md:w-52 md:h-70 rounded-t-full rounded-b-2xl overflow-hidden border-2 border-white shadow-2xl relative z-10">
                 <img
                   src={groom.photo}
                   alt={groom.name}
-                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
                 />
               </div>
-              <div className="absolute -inset-2 rounded-t-full rounded-b-3xl border border-champagne-300/60 -z-0" />
+              <div className="absolute -inset-2.5 rounded-t-full rounded-b-3xl border border-champagne-300/70 -z-0" />
             </div>
 
-            <span className="font-script text-4xl text-sage-600 mb-1">
+            <span className="font-script text-4xl md:text-5xl text-gold-gradient mb-1">
               {groom.nickname}
             </span>
-            <h3 className="font-serif text-2xl font-bold text-stone-900 mb-2">
+            <h3 className="font-serif text-2xl md:text-3xl font-bold text-stone-900 tracking-tight mb-2">
               {groom.name}
             </h3>
 
-            <div className="w-12 h-[2px] bg-champagne-300 mb-4" />
+            <div className="w-10 h-[1.5px] bg-champagne-400 my-2" />
 
-            <p className="text-xs text-stone-500 uppercase tracking-widest mb-1">
-              Putra Pertama dari:
+            <p className="font-display text-[10px] uppercase tracking-[0.25em] text-stone-500 mt-2">
+              {groom.order}
             </p>
-            <p className="text-sm font-medium text-stone-800">
+            <p className="font-serif text-base text-stone-800 font-medium mt-1">
               {groom.father}
             </p>
-            <p className="text-sm font-medium text-stone-800 mb-4">
+            <p className="font-serif text-base text-stone-800 font-medium mb-5">
               &amp; {groom.mother}
             </p>
 
@@ -92,7 +101,7 @@ export default function Profiles() {
               href={groom.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-100 hover:bg-sage-100 text-stone-700 hover:text-sage-800 text-xs font-medium transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-100 hover:bg-champagne-100/70 text-stone-700 hover:text-stone-900 text-xs font-medium border border-stone-200 transition-colors"
             >
               <Instagram className="w-3.5 h-3.5 text-pink-600" />
               <span>{groom.instagramHandle}</span>
@@ -105,36 +114,36 @@ export default function Profiles() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8 }}
-            className="flex flex-col items-center text-center p-8 rounded-3xl glass-card hover:shadow-xl transition-shadow duration-300"
+            className="flex flex-col items-center text-center p-8 md:p-10 rounded-3xl wedding-card hover:shadow-xl transition-all duration-500"
           >
-            {/* Bingkai Foto Arch / Arsitektural */}
+            {/* Foto Arch Mewah dengan Double Hairline Border */}
             <div className="relative mb-6">
-              <div className="w-48 h-60 rounded-t-full rounded-b-2xl overflow-hidden border-4 border-white shadow-xl relative z-10">
+              <div className="w-48 h-64 md:w-52 md:h-70 rounded-t-full rounded-b-2xl overflow-hidden border-2 border-white shadow-2xl relative z-10">
                 <img
                   src={bride.photo}
                   alt={bride.name}
-                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
                 />
               </div>
-              <div className="absolute -inset-2 rounded-t-full rounded-b-3xl border border-champagne-300/60 -z-0" />
+              <div className="absolute -inset-2.5 rounded-t-full rounded-b-3xl border border-champagne-300/70 -z-0" />
             </div>
 
-            <span className="font-script text-4xl text-sage-600 mb-1">
+            <span className="font-script text-4xl md:text-5xl text-gold-gradient mb-1">
               {bride.nickname}
             </span>
-            <h3 className="font-serif text-2xl font-bold text-stone-900 mb-2">
+            <h3 className="font-serif text-2xl md:text-3xl font-bold text-stone-900 tracking-tight mb-2">
               {bride.name}
             </h3>
 
-            <div className="w-12 h-[2px] bg-champagne-300 mb-4" />
+            <div className="w-10 h-[1.5px] bg-champagne-400 my-2" />
 
-            <p className="text-xs text-stone-500 uppercase tracking-widest mb-1">
-              Putri Kedua dari:
+            <p className="font-display text-[10px] uppercase tracking-[0.25em] text-stone-500 mt-2">
+              {bride.order}
             </p>
-            <p className="text-sm font-medium text-stone-800">
+            <p className="font-serif text-base text-stone-800 font-medium mt-1">
               {bride.father}
             </p>
-            <p className="text-sm font-medium text-stone-800 mb-4">
+            <p className="font-serif text-base text-stone-800 font-medium mb-5">
               &amp; {bride.mother}
             </p>
 
@@ -142,7 +151,7 @@ export default function Profiles() {
               href={bride.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-100 hover:bg-sage-100 text-stone-700 hover:text-sage-800 text-xs font-medium transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-100 hover:bg-champagne-100/70 text-stone-700 hover:text-stone-900 text-xs font-medium border border-stone-200 transition-colors"
             >
               <Instagram className="w-3.5 h-3.5 text-pink-600" />
               <span>{bride.instagramHandle}</span>
@@ -150,8 +159,44 @@ export default function Profiles() {
           </motion.div>
 
         </div>
+
+        {/* Love Story Timeline (Sentuhan Manusiawi & Romantis) */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-3xl mx-auto pt-8 border-t border-champagne-300/40 text-center"
+        >
+          <div className="inline-flex items-center gap-1.5 mb-2 text-champagne-700 font-display text-[11px] uppercase tracking-[0.3em]">
+            <Heart className="w-3.5 h-3.5 fill-champagne-500/20 text-champagne-600" />
+            <span>Kisah Kasih Kami</span>
+          </div>
+          <h3 className="font-serif text-2xl md:text-3xl text-stone-900 mb-10">
+            Perjalanan Menuju Hari Bahagia
+          </h3>
+
+          <div className="relative border-l-2 border-champagne-200 ml-4 md:mx-auto md:max-w-xl text-left space-y-8 pl-6">
+            {loveStory.map((milestone, idx) => (
+              <div key={idx} className="relative group">
+                {/* Marker Dot */}
+                <span className="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-champagne-400 border-2 border-white shadow" />
+                
+                <span className="font-display text-xs font-bold text-sage-800 tracking-wider">
+                  {milestone.year}
+                </span>
+                <h4 className="font-serif text-lg font-bold text-stone-900 mt-0.5">
+                  {milestone.title}
+                </h4>
+                <p className="font-serif text-stone-600 text-sm leading-relaxed mt-1">
+                  {milestone.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
       </div>
     </section>
   );
 }
-

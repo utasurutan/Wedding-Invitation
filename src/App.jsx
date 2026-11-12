@@ -11,13 +11,10 @@ import RSVP from './components/RSVP';
 import Footer from './components/Footer';
 
 export default function App() {
-  // State Global: Apakah undangan sudah dibuka oleh pengguna?
   const [isInvitationOpened, setIsInvitationOpened] = useState(false);
-  
-  // State Global: Status pemutaran musik latar
   const [isPlaying, setIsPlaying] = useState(false);
 
-  // Kunci scroll halaman (Scroll Lock) saat undangan belum dibuka
+  // Kunci Scroll Layar sebelum undangan dibuka
   useEffect(() => {
     if (!isInvitationOpened) {
       document.body.style.overflow = 'hidden';
@@ -31,22 +28,20 @@ export default function App() {
     };
   }, [isInvitationOpened]);
 
-  // Handler saat tombol "Buka Undangan" diklik pada cover depan (Hero)
   const handleOpenInvitation = () => {
     setIsInvitationOpened(true);
     setIsPlaying(true);
 
-    // Scroll mulus menuju bagian profil kedua mempelai
     setTimeout(() => {
       const targetElement = document.getElementById('profiles');
       if (targetElement) {
         targetElement.scrollIntoView({ behavior: 'smooth' });
       }
-    }, 200);
+    }, 300);
   };
 
   return (
-    <div className="min-h-screen bg-sage-50 text-stone-800 font-sans selection:bg-sage-200 selection:text-sage-900 relative">
+    <div className="min-h-screen bg-[#fcfaf7] text-stone-800 font-sans selection:bg-sage-200 selection:text-sage-900 relative">
       
       {/* 1. Cover Depan (Hero dengan parameter URL ?to=...) */}
       <Hero 
@@ -54,7 +49,7 @@ export default function App() {
         onOpenInvitation={handleOpenInvitation} 
       />
 
-      {/* 2. Audio Player (Fixed di pojok layar) & Bottom Navigation */}
+      {/* 2. Audio Player & Bottom Navigation */}
       <AudioPlayer 
         isPlaying={isPlaying} 
         setIsPlaying={setIsPlaying} 
@@ -65,31 +60,30 @@ export default function App() {
         isOpened={isInvitationOpened} 
       />
 
-      {/* Konten Utama Undangan (Hanya terbuka setelah Buka Undangan) */}
+      {/* Konten Utama Undangan */}
       <main className={`transition-opacity duration-1000 ${isInvitationOpened ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-        {/* 3. Profil Mempelai */}
+        {/* 3. Profil Mempelai & Love Story Timeline */}
         <Profiles />
 
-        {/* 4. Jadwal Acara & Dynamic Countdown Timer */}
+        {/* 4. Jadwal Acara, Countdown Timer & Dress Code Palette */}
         <EventSchedule />
 
         {/* 5. Peta Lokasi (Iframe Google Maps & CTA Native) */}
         <LocationMaps />
 
-        {/* 6. Galeri Dokumentasi Pre-Wedding & Lightbox Modal */}
+        {/* 6. Galeri Pre-Wedding & Lightbox Modal */}
         <Gallery />
 
-        {/* 7. Amplop Digital (Rekening Bank & QRIS) */}
+        {/* 7. Amplop Digital (Realistic Bank Cards & QRIS) */}
         <WeddingGift />
 
         {/* 8. Buku Tamu & Formulir RSVP */}
         <RSVP />
 
-        {/* Footer & Penutup */}
+        {/* Footer */}
         <Footer />
       </main>
 
     </div>
   );
 }
-

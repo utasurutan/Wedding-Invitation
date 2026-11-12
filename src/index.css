@@ -7,50 +7,91 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   body {
+    background-color: #fbf9f6;
+    color: #2b2b2b;
     overflow-x: hidden;
   }
 }
 
-/* Custom scrollbar */
+/* Custom Luxury Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f5f7f5;
+  background: #f4ede2;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #adc4ad;
+  background: #cbb692;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #648864;
+  background: #836744;
 }
 
-/* Glassmorphism utility */
-.glass-card {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(229, 236, 229, 0.9);
+/* Luxury Card Styling */
+.wedding-card {
+  background: #ffffff;
+  border: 1px solid rgba(220, 206, 180, 0.45);
+  box-shadow: 0 10px 30px -10px rgba(57, 74, 54, 0.08), 0 4px 6px -2px rgba(57, 74, 54, 0.03);
 }
 
-.glass-card-dark {
-  background: rgba(44, 57, 44, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(133, 165, 133, 0.3);
+.wedding-card-dark {
+  background: linear-gradient(145deg, #1f2b1d 0%, #151d14 100%);
+  border: 1px solid rgba(223, 186, 109, 0.25);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
 }
 
-/* Pattern overlay */
-.bg-wedding-pattern {
-  background-image: radial-gradient(#85a585 0.75px, transparent 0.75px), radial-gradient(#85a585 0.75px, #f5f7f5 0.75px);
-  background-size: 30px 30px;
-  background-position: 0 0, 15px 15px;
+.glass-pill {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(220, 206, 180, 0.6);
+  box-shadow: 0 15px 35px -5px rgba(44, 57, 42, 0.15);
 }
 
+/* Luxury Gold Text Gradient */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #b38728 0%, #f6e5a6 50%, #9c6c19 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gold-subtle {
+  background: linear-gradient(135deg, #cba56f 0%, #ecdcb8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Subtle Paper Grain Effect */
+.bg-paper {
+  background-color: #fbf9f6;
+  background-image: radial-gradient(#d9e2d7 0.6px, transparent 0.6px), radial-gradient(#d9e2d7 0.6px, #fbf9f6 0.6px);
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
+}
+
+/* Wax Seal Stamp 3D Effect */
+.wax-seal {
+  background: radial-gradient(circle at 35% 35%, #9e2a2b 0%, #6f1d1b 60%, #470f10 100%);
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 255, 255, 0.4),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.6),
+    0 8px 20px rgba(0, 0, 0, 0.35);
+  border: 2px solid rgba(111, 29, 27, 0.8);
+}
+
+/* Equalizer Bars Animation for Audio Player */
+@keyframes eq-1 { 0%, 100% { height: 4px; } 50% { height: 16px; } }
+@keyframes eq-2 { 0%, 100% { height: 14px; } 50% { height: 6px; } }
+@keyframes eq-3 { 0%, 100% { height: 8px; } 50% { height: 18px; } }
+
+.animate-eq-1 { animation: eq-1 0.8s ease-in-out infinite; }
+.animate-eq-2 { animation: eq-2 0.7s ease-in-out infinite 0.15s; }
+.animate-eq-3 { animation: eq-3 0.9s ease-in-out infinite 0.3s; }

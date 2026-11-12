@@ -17,9 +17,8 @@ export default function BottomNav({ isOpened }) {
   useEffect(() => {
     if (!isOpened) return;
 
-    // Deteksi section yang sedang terlihat saat di-scroll
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 250;
+      const scrollPosition = window.scrollY + 280;
       for (const item of navItems) {
         const element = document.getElementById(item.id);
         if (element) {
@@ -50,13 +49,13 @@ export default function BottomNav({ isOpened }) {
   return (
     <AnimatePresence>
       <motion.nav
-        initial={{ y: 80, opacity: 0 }}
+        initial={{ y: 90, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        exit={{ y: 80, opacity: 0 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
+        exit={{ y: 90, opacity: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className="fixed bottom-4 inset-x-0 mx-auto w-fit max-w-[95vw] z-40"
       >
-        <div className="flex items-center gap-1 sm:gap-2 px-3 py-2 bg-white/90 backdrop-blur-lg rounded-full border border-sage-200/80 shadow-2xl shadow-sage-950/15">
+        <div className="flex items-center gap-1 sm:gap-1.5 px-3 py-1.5 bg-stone-900/90 backdrop-blur-xl rounded-full border border-champagne-300/30 shadow-2xl shadow-stone-950/40">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeSection === item.id;
@@ -66,21 +65,21 @@ export default function BottomNav({ isOpened }) {
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
                 aria-label={item.label}
-                className={`relative flex flex-col items-center justify-center py-1.5 px-3 rounded-full transition-all duration-300 ${
+                className={`relative flex flex-col items-center justify-center py-1.5 px-3 rounded-full transition-all duration-300 cursor-pointer ${
                   isActive
-                    ? 'text-sage-800 font-semibold'
-                    : 'text-stone-500 hover:text-sage-700'
+                    ? 'text-champagne-200 font-semibold'
+                    : 'text-stone-400 hover:text-stone-200'
                 }`}
               >
                 {isActive && (
                   <motion.div
-                    layoutId="activePill"
-                    className="absolute inset-0 bg-sage-100/90 rounded-full -z-10 border border-sage-300/40"
-                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                    layoutId="activeBottomNavPill"
+                    className="absolute inset-0 bg-sage-800/80 rounded-full -z-10 border border-champagne-400/40 shadow-inner"
+                    transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                   />
                 )}
-                <Icon className={`w-4 h-4 md:w-5 md:h-5 transition-transform duration-200 ${isActive ? 'scale-110 text-sage-700' : ''}`} />
-                <span className="text-[10px] md:text-xs mt-0.5 tracking-tight font-medium">
+                <Icon className={`w-4 h-4 md:w-4.5 md:h-4.5 transition-transform duration-200 ${isActive ? 'scale-110 text-champagne-300' : ''}`} />
+                <span className="text-[10px] md:text-[11px] mt-0.5 tracking-tight font-medium">
                   {item.label}
                 </span>
               </button>
@@ -91,4 +90,3 @@ export default function BottomNav({ isOpened }) {
     </AnimatePresence>
   );
 }
-
